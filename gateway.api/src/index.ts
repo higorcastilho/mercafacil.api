@@ -1,9 +1,9 @@
 import express, { NextFunction, raw, Request, Response } from "express";
 import jwt from "jsonwebtoken";
 import httpProxy from "express-http-proxy";
-import dotenvsafe from "dotenv-safe";
+import dotenv from "dotenv";
 
-dotenvsafe.config();
+dotenv.config();
 const app = express();
 
 app.use(express.json())

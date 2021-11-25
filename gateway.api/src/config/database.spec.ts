@@ -1,14 +1,9 @@
-import dotenvsafe from "dotenv-safe";
-dotenvsafe.config();
+import { run } from "./database";
+import dotenv from "dotenv";
+import { disconnect } from "process";
+dotenv.config();
 
-import { connect, disconnect } from "./database";
 
-test("MongoDB connection", async () => {
-    const connection = await connect();
-    expect(connection).toBeTruthy();
-});
-
-test("MongoDB disconnection", async () => {
-    const isDisconnected = await disconnect();
-    expect(isDisconnected).toBeTruthy();
+test("asdfafsd", async () => {
+    await run();
 });

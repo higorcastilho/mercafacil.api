@@ -1,19 +1,39 @@
-import mongodb, { MongoClient } from "mongodb";
+import { connect, Schema, model, connection } from 'mongoose';
+import dotenv from "dotenv";
+dotenv.config();
 
-const MongoCLient = mongodb.MongoClient;
-let client: MongoClient | null = null;
+const mongoURI = process.env.MONGO_CONNECTION;
 
-export async function connect() {
-    if (!client)
-        client = new MongoCLient(process.env.MONGO_CONNECTION);
-
-        await client.connect();
-        return client.db(process.env.DATABASE_NAME);
+// 1. Create an interface representing a document in MongoDB.
+interface User {
+  name: string;
+  identifier: string;
+  password?: string;
 }
 
-export async function disconnect() {
-    if (!client) return true;
-    await client.close();
-    client = null;
-    return true;
+// 2. Create a Schema corresponding to the document interface.
+const schema = new Schema<User>({
+  name: { type: String, required: true },
+  identifier: { type: String, required: true },
+  password: String
+});
+
+// 3. Create a Model.
+const UserModel = model<User>('User', schema);
+
+run().catch(err => console.log(err));
+
+export async function run(): Promise<void> {
+  // 4. Connect to MongoDB
+
+  if (connection.readyState == 0) {
+      await connect(mongoURI);
+  }
+  
+  const doc = new UserModel({
+    name: 'macapa',
+    identifier: 'http://localhost:6001',
+    password: '123456'
+  });
+  await doc.save();
 }

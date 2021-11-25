@@ -1,7 +1,9 @@
 import express, { NextFunction, raw, Request, Response } from "express";
 import jwt from "jsonwebtoken";
 import httpProxy from "express-http-proxy";
+import dotenvsafe from "dotenv-safe";
 
+dotenvsafe.config();
 const app = express();
 
 app.use(express.json())
@@ -9,8 +11,6 @@ app.use(express.urlencoded({ extended: true }));
 // app.use("/", (req, res) => {
 //     res.json({ message: "It's ok!" })
 // })
-
-let pedinte = "";
 
 function verifyJWT(req: Request, res: Response, next: NextFunction) {
     const token = req.headers['authorization'];
@@ -74,6 +74,6 @@ function selectProxyHost(req: any) {
 
 app.post("/contacts", verifyJWT, httpProxy(selectProxyHost));
 
-app.listen(3000, () => {
-    console.log("Server running on port 3000");
+app.listen(process.env.PORT, () => {
+    console.log(`Server running on port ${process.env.PORT}`);
 });

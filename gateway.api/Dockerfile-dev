@@ -1,0 +1,12 @@
+FROM node:16
+
+WORKDIR /usr/src/app
+COPY package*.json ./
+COPY nodemon.json ./
+COPY tsconfig.json ./
+
+EXPOSE 3000
+
+CMD npm config set cache-min 9999999 \
+    && npm install \
+    && npm run start:dev

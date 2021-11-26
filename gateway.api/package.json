@@ -4,7 +4,13 @@
   "description": "",
   "main": "index.js",
   "scripts": {
-    "start:dev": "nodemon",
+    "start": "node build/index.js",
+    "start:dev": "nodemon --legacy-watch",
+    "clean": "rm -rf build/*",
+    "build": "tsc",
+    "clean-build": "rm -rf build/* && tsc",
+    "build:watch": "tsc --watch",
+    "clean-build:watch": "rm -rf build/* && tsc --watch",
     "test": "jest"
   },
   "keywords": [],

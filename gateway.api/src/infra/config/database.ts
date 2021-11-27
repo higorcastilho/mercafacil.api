@@ -12,6 +12,4 @@ export async function run(): Promise<void> {
   if (connection.readyState == 0) {
       await connect(dbHost, { useNewUrlParser: true, useUnifiedTopology: true } as ConnectOptions);
   }
-
-  console.log(connection.readyState)
 }

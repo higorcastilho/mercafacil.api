@@ -1,0 +1,12 @@
+[
+    {
+      "username": "macapa",
+      "identifier": "http://localhost:6001",
+      "password": "123456"
+    },
+    {
+    "username": "varejao",
+    "identifier": "http://localhost:6002",
+    "password": "123456"
+    }
+]

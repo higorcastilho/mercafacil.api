@@ -24,7 +24,6 @@ export async function seedUsers() {
 
 export async function getUserByName(username: string): Promise<Document<any, any, User> & User & { _id: ObjectId; } | null> {
     await run();
-    await seedUsers()
     const users = model("User", schema);
     const user = await users.findOne({ 'username': username }).exec();
     return user;

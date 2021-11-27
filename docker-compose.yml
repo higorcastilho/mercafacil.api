@@ -9,6 +9,12 @@ services:
       - ./tmp/mongo:/data/db
     restart: always
 
+  mongo-seed:
+    image: mongo-seed
+    build: 
+      context: ./gateway.api/db-seed
+      dockerfile: Dockerfile
+
   gateway.api:
     image: gateway.api
     build:

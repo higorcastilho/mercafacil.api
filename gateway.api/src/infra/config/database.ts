@@ -7,7 +7,7 @@ dotenv.config();
 run().catch(err => console.log(err));
 
 export async function run(): Promise<void> {
-  const dbHost = process.env.DBHOST || "mongodb://root:123456@localhost:27017";
+  const dbHost = process.env.DBHOST || "mongodb://root:123456@localhost:27017/admin";
 
   if (connection.readyState == 0) {
       await connect(dbHost, { useNewUrlParser: true, useUnifiedTopology: true } as ConnectOptions);

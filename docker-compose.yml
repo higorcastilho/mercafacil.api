@@ -34,3 +34,17 @@ services:
       - mongo
     restart: always
   
+  macapa.api:
+    image: macapa.api
+    build:
+      context: ./macapa.api
+      dockerfile: Dockerfile
+    container_name: macapa.api
+    volumes:
+      - ./tmp/npm:/root/.npm:z
+      - ./macapa.api/src:/usr/src/app/src:z
+    ports:
+      - "6001:6001"
+    depends_on:
+      - gateway.api
+    restart: always

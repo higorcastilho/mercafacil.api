@@ -1,5 +1,14 @@
 version: '3'
 services:
+  mongo:
+    image: mongo
+    container_name: mongo
+    ports:
+      - "27017:27017"
+    volumes:
+      - ./tmp/mongo:/data/db
+    restart: always
+
   gateway.api:
     image: gateway.api
     build:
@@ -14,5 +23,8 @@ services:
     environment:
       - PORT=3000
       - NODE_ENV=development
+      - DBHOST=mongodb://mongo:27017
+    depends_on:
+      - mongo
     restart: always
   

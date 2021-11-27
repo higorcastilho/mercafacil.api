@@ -38,8 +38,8 @@ function selectProxyHost(req: any) {
 app.post("/contacts", verifyJWT, httpProxy(selectProxyHost));
 
 const PORT = process.env.PORT && parseInt(process.env.PORT) || 3000;
-const HOST = process.env.HOST || "0.0.0.0";
+// const HOST = process.env.HOST || "0.0.0.0";
 
-app.listen(PORT, HOST, () => {
+app.listen(PORT, () => {
     console.log(`Server running on port ${PORT}`);
 });

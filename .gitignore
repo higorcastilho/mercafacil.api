@@ -2,9 +2,9 @@ gateway.api/node_modules/
 macapa.api/node_modules/
 varejao.api/node_modules/
 
-gateway.api/.env/
-macapa.api/.env/
-varejao.api/.env/
+# gateway.api/.env/
+# macapa.api/.env/
+# varejao.api/.env/
 
 tmp/
 

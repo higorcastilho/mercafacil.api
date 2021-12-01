@@ -14,6 +14,8 @@ services:
     build: 
       context: ./gateway.api/db-seed
       dockerfile: Dockerfile
+    depends_on:
+      - mongo
 
   gateway.api:
     image: gateway.api

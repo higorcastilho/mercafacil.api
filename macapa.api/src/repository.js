@@ -1,9 +1,9 @@
 const db = require("./db");
 
-async function insert(contact) {
+async function insert(name, cellphone) {
     const conn = await db.connect();
     const sql = 'INSERT INTO contact(name, cellphone) VALUES (?,?);';
-    const values = [contact.name, contact.cellphone];
+    const values = [name, cellphone];
     return await conn.query(sql, values);
 }
 

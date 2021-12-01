@@ -1,6 +1,6 @@
 const express = require("express");
 const dotenv = require("dotenv");
-const { insert } = require("./repository")
+const { post } = require("./service");
 
 dotenv.config();
 
@@ -8,17 +8,12 @@ const app = express();
 app.use(express.json());
 
 app.post("/contacts", async (req, res) => {
-    console.log(req.body.nome);
-    console.log(req.body.celular);
 
-    const contact = {
-        name: req.body.nome,
-        cellphone: req.body.celular
-    }
+    const { nome, celular } = req.body;
 
-    await insert(contact);
+    await post(nome, celular);
 
-    res.json({ nome: req.body.nome, celular: req.body.celular, host: "host macapa" });
+    res.status(200).json({});
 
 });
 

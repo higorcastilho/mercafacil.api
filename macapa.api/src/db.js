@@ -9,7 +9,7 @@ async function connect() {
     if (global.connection && global.connection.state !== 'disconnected')
         return global.connection;
     const mysql = require("mysql2/promise");
-    const connection = await mysql.createConnection("mysql://root:123456@localhost:3306/macapadb");
+    const connection = await mysql.createConnection(`mysql://${process.env.MYSQL_USER}:${process.env.MYSQL_ROOT_PASSWORD}@${process.env.DBHOST}/${process.env.MYSQL_DATABASE}`);
     console.log('connected to MySQL');
     global.connection = connection;
     return connection;

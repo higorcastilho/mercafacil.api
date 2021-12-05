@@ -45,11 +45,11 @@ services:
       - "3306"
     environment:
       - MYSQL_ROOT_PASSWORD=123456
-      - MYSQL_DATABASE=macapadb
     ports:
       - 3306:3306
     volumes:
       - ./macapa.api/db:/docker-entrypoint-initdb.d/:ro
+      - ./tmp/mysqldb:/var/lib/mysql:rw
     depends_on:
       - gateway.api
   macapa.api:

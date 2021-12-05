@@ -4,17 +4,33 @@
 // 	name VARCHAR ( 200 ) NOT NULL,
 // 	cellphone VARCHAR ( 20 ) NOT NULL
 // );  
+const mysql = require("mysql2");
+const { env } = require("process");
 
-async function connect() {
-    if (global.connection && global.connection.state !== 'disconnected')
-        return global.connection;
-    const mysql = require("mysql2/promise");
-    const connection = await mysql.createConnection(`mysql://${process.env.MYSQL_USER}:${process.env.MYSQL_ROOT_PASSWORD}@${process.env.DBHOST}/${process.env.MYSQL_DATABASE}`);
-    console.log('connected to MySQL');
-    global.connection = connection;
-    return connection;
+const dbCondig = {
+    host: process.env.DBHOST,
+    user: process.env.MYSQL_USER,
+    database: process.env.MYSQL_DATABASE,
+    password: process.env.MYSQL_ROOT_PASSWORD,
+    port: process.env.DBPORT,
+    connectTimeout: parseInt(process.env.CONNECT_TIMEOUT)
 }
 
+const conn = new mysql.createConnection(dbCondig);
+
+conn.connect(
+    function (err) { 
+    if (err) { 
+        console.log("!!! Cannot connect !!! Error:");
+        throw err;
+    }
+    else
+    {
+       console.log("Connection established.");
+        //    queryDatabase();
+    }
+});
+
 module.exports = {
-    connect
+    conn
 }

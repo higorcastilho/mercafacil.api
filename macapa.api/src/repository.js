@@ -1,10 +1,17 @@
 const db = require("./db");
 
-async function insert(name, cellphone) {
-    const conn = await db.connect();
-    const sql = 'INSERT INTO contact(name, cellphone) VALUES (?,?);';
-    const values = [name, cellphone];
-    return await conn.query(sql, values);
+function insert(name, cellphone) {
+    const conn = db.conn;
+    console.log(name, cellphone)
+    conn.query('INSERT INTO contact(name, cellphone) VALUES (?,?);',
+        [name, cellphone],
+        function(err, results, fields) {
+            console.log(results);
+            console.log(fields);
+            conn.end();
+        }
+    
+    );
 }
 
 module.exports = {

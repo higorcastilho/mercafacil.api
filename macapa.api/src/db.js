@@ -16,21 +16,24 @@ const dbCondig = {
     connectTimeout: parseInt(process.env.CONNECT_TIMEOUT)
 }
 
-const conn = new mysql.createConnection(dbCondig);
-
-conn.connect(
-    function (err) { 
-    if (err) { 
-        console.log("!!! Cannot connect !!! Error:");
-        throw err;
-    }
-    else
-    {
-       console.log("Connection established.");
-        //    queryDatabase();
-    }
-});
+function connect() {    
+    const conn = new mysql.createConnection(dbCondig);
+    conn.connect(
+        function (err) { 
+            if (err) { 
+                console.log("!!! Cannot connect !!! Error:");
+                throw err;
+            }
+            else
+            {
+                console.log("Connection established.");
+                //    queryDatabase();
+            }
+        });
+    console.log(conn.state)
+    return conn;
+}
 
 module.exports = {
-    conn
+    connect
 }

@@ -8,7 +8,7 @@
 
 
 //requisitos
-// CREATE table contacts (
+// CREATE table contact (
 // 	id serial PRIMARY KEY,
 // 	nome VARCHAR ( 100 ) NOT NULL,
 // 	celular VARCHAR ( 13 ) NOT NULL
@@ -17,11 +17,11 @@
 const { Client } = require("pg");
 
 const dbCondig = {
-    user: "postgres",
-    host: "localhost",
-    database: "varejaodb",
-    password: "postgres",
-    port: "5432",
+    user: process.env.POSTGRES_USER,
+    host: process.env.DBHOST,
+    database: process.env.POSTGRES_DATABASE,
+    password: process.env.POSTGRES_PASSWORD,
+    port: process.env.DBPORT,
 }
 
 async function connect() {    

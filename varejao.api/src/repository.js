@@ -1,3 +1,4 @@
+const { resolve } = require("path/posix");
 const db = require("./db");
 
 async function insert(name, cellphone) {
@@ -14,8 +15,18 @@ async function insert(name, cellphone) {
     // await client.end();
 }
 
+async function get() {
+  const client = await db.connect();
+  const query = 'SELECT * FROM contact';
+  const response = await client.query(query);
+  const rows = response.rows;
+  await client.end();
+  return rows;
+}
+
 module.exports = {
-    insert
+    insert,
+    get
 }
 
 

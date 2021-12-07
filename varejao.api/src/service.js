@@ -1,13 +1,19 @@
-const { insert } = require("./repository");
+const { insert, get } = require("./repository");
 const { cellphoneFormatter } = require("./helpers");
 
-function post(name, cellphone) {
+async function post(name, cellphone) {
     // const formattedName = name.toUpperCase();
     // const formattedCellphone = cellphoneFormatter(cellphone);
-    insert(name, cellphone);
+    await insert(name, cellphone);
+}
+
+async function getAll() {
+    const result = await get();
+    return result;
 }
 
 module.exports = {
-    post
+    post,
+    getAll
 }
 

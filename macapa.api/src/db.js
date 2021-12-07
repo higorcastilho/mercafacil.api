@@ -4,7 +4,7 @@
 // 	name VARCHAR ( 200 ) NOT NULL,
 // 	cellphone VARCHAR ( 20 ) NOT NULL
 // );  
-const mysql = require("mysql2");
+const mysql = require("mysql2/promise");
 const { env } = require("process");
 
 const dbCondig = {
@@ -16,20 +16,9 @@ const dbCondig = {
     connectTimeout: parseInt(process.env.CONNECT_TIMEOUT)
 }
 
-function connect() {    
-    const conn = new mysql.createConnection(dbCondig);
-    conn.connect(
-        function (err) { 
-            if (err) { 
-                console.log("!!! Cannot connect !!! Error:");
-                throw err;
-            }
-            else
-            {
-                console.log("Connection established.");
-                //    queryDatabase();
-            }
-        });
+async function connect() {    
+    const conn = await new mysql.createConnection(dbCondig);
+    await conn.connect();
     console.log(conn.state)
     return conn;
 }

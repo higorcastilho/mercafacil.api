@@ -1,20 +1,21 @@
 const db = require("./db");
 
-function insert(name, cellphone) {
-    const conn = db.connect();
-    console.log(name, cellphone)
-    conn.query('INSERT INTO contact(name, cellphone) VALUES (?,?);',
-        [name, cellphone],
-        function(err, results, fields) {
-            console.log(results);
-            console.log(fields);
-            conn.end();
-        }
-    );
+async function insert(name, cellphone) {
+    const conn = await db.connect();
+    await conn.query('INSERT INTO contact(name, cellphone) VALUES (?,?);', [name, cellphone]);
+    await conn.end();
+}
+
+async function get() {
+    const conn = await db.connect();
+    const [rows, fields] = await conn.query('SELECT * FROM `contact`;')
+    await conn.end();
+    return rows;
 }
 
 module.exports = {
-    insert
+    insert,
+    get
 }
 
 
